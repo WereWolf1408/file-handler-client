@@ -1,15 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import TestAPIComponent from "./components/TestComponent";
-import reportWebVitals from './reportWebVitals';
+import './index.less';
+import App from '../App';
+import TestAPIComponent from "../components/TestComponent.jsx";
+import FileHandler from "../components/FileHandler/FileHandler.jsx";
+import reportWebVitals from '../reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
     {/* <App /> */}
-    <TestAPIComponent/>
-  </React.StrictMode>,
+    {/* <TestAPIComponent/> */}
+    <FileHandler />
+   </React.StrictMode>,
   document.getElementById('root')
 );
 
