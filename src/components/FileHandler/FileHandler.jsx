@@ -1,16 +1,19 @@
 import React, {Component} from 'react';
-import PrimaryButton from "../Buttons/PrimaryButton.jsx";
+import PrimaryButton from "../Common/Buttons/PrimaryButton.jsx";
+import {Container} from '../Common/Container/Container.jsx';
+import {BottomNavigation} from '../Common/BottomNavigation/BottomNavigation.jsx';
 
 import './FileHandler.less';
 
 class FileHandler extends Component {
   render() {
     return (
-      <React.Fragment>
+      <Container classes="file-handler-container">
         <h3>FileHandler Component !</h3>
         <PrimaryButton title="Click me !" />
-      </React.Fragment>
-    )
+        <BottomNavigation></BottomNavigation>
+      </Container>
+    );
   }
 }
 
