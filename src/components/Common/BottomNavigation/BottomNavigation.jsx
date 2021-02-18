@@ -1,32 +1,36 @@
-import React from 'react';
-import { makeStyles } from "@material-ui/core/styles";
-import { BottomNavigation } from '@material-ui/core';
+import React, {useState, useEffect} from 'react';
+import { BottomNavigation, ListItemAvatar } from '@material-ui/core';
 import {BottomNavigationAction} from '../BottomNavigationAction/BottomNavigationAction.jsx';
 
-const useStyles = makeStyles({
-  root: {
-    width: 500,
-  },
-});
-
 const CustomBottomNavigation = (props) => {
-  const classes = useStyles();
-  const [value, setValue] = React.useState("recents");
+  const { storage } = props;
+  const [data, setData] = useState(storage);
 
-  const handleChange = (event, newValue) => {
-    console.log('123');
-    setValue(newValue);
-  };
+  useEffect(() => {
+      console.log('useEffecr was called');
+  })
+
+  const onClickHandler = (event, index) => {
+    const newData = data.map((item, itemIndex) => {
+      itemIndex === index? item.selected = 1 : item.selected = 0;
+      return item;
+    });
+    setData(newData);
+  }
 
   return (
-    <BottomNavigation
-      value={value}
-      onChange={handleChange}
-      className={classes.root}
-    >
-      <BottomNavigationAction />
-      <BottomNavigationAction />
-      <BottomNavigationAction />
+    <BottomNavigation>
+      {
+        data.map((item, index) => 
+          <BottomNavigationAction
+            isSelected={item.selected === 1? true :  false}
+            label={item.label} 
+            index={index} 
+            key={index.toString()}
+            onClickHandler={onClickHandler} 
+          />
+        )
+      }
     </BottomNavigation>
   );
 }
