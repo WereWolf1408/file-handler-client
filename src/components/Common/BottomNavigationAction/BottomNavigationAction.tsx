@@ -1,12 +1,19 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { SyntheticEvent } from "react";
 import { BottomNavigationAction } from "@material-ui/core";
 import StorageIcon from "@material-ui/icons/Storage";
 
-const CustomBottomNavigationAction = (props) => {
+interface CustomButNavActionI {
+  label: string;
+  isSelected: boolean;
+  onClickHandler: (event: SyntheticEvent<any, Event>, index: number) => void;
+  index: number;
+} 
+
+
+const CustomBottomNavigationAction = (props: CustomButNavActionI) => {
   const { label, isSelected, onClickHandler, index } = props;
 
-  const onClick = (event) => {
+  const onClick: (event: SyntheticEvent<any, Event>) => void = (event) => {
     console.log(props);
     onClickHandler(event, index);
   }
@@ -22,11 +29,5 @@ const CustomBottomNavigationAction = (props) => {
     />
   );
 };
-
-CustomBottomNavigationAction.propTypes = {
-  selected: PropTypes.bool,
-  label: PropTypes.string,
-  onClick: PropTypes.func,
-}
 
 export { CustomBottomNavigationAction as BottomNavigationAction };

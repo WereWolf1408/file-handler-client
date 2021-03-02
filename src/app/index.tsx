@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.less';
 import App from '../App';
-import TestAPIComponent from "../components/TestComponent.jsx";
-import FileHandler from "../components/FileHandler/FileHandler.jsx";
+import TestAPIComponent from "../components/TestComponent";
+import FileHandler from "../components/FileHandler/FileHandler";
 import reportWebVitals from '../reportWebVitals';
 
 ReactDOM.render(

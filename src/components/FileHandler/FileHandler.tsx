@@ -1,15 +1,33 @@
-import React, {Component} from 'react';
-import PrimaryButton from "../Common/Buttons/PrimaryButton.jsx";
-import {Container} from '../Common/Container/Container.jsx';
-import {BottomNavigation} from '../Common/BottomNavigation/BottomNavigation.jsx';
-import {CustomCard} from '../Common/Card/CustomCard.jsx';
-import {stockData} from '../../data/data';
+import React, {Component, SyntheticEvent} from 'react';
+import PrimaryButton from "../Common/Buttons/PrimaryButton";
+import {Container} from '../Common/Container/Container';
+import {BottomNavigation} from '../Common/BottomNavigation/BottomNavigation';
+import {CustomCard} from '../Common/Card/CustomCard';
+import {stockData} from '../../data/data.js';
 
 import './FileHandler.less';
 
-class FileHandler extends Component {
 
-  constructor(props) {
+interface NavigationItemI {
+  label: string;
+  selected: number;
+  index: string;
+}
+
+interface CardsItemI {
+  [key: string] : Array<{label: string}>;
+}
+
+interface FileHandlerStateI {
+  navigation: Array<NavigationItemI>;
+  activeIndex: string;
+  cards: CardsItemI;
+}
+
+interface FileHandlerPropsI {}
+
+class FileHandler extends Component<FileHandlerPropsI, FileHandlerStateI> {
+  constructor(props: FileHandlerPropsI) {
     super(props);
     this.state = stockData;
     console.log('inside fileHandler Constructor');
@@ -21,9 +39,9 @@ class FileHandler extends Component {
     console.log('--> File Handler trigger component did mount');
   }
 
-  navClickHandler(event, index) {
-    let activeIndex = 0;
-    const newData = this.state.navigation.map((item, itemIndex) => {
+  navClickHandler(event: SyntheticEvent<any, Event>, index: number) {
+    let activeIndex = '';
+    const newData = this.state.navigation.map((item: NavigationItemI , itemIndex: number) => {
       if (itemIndex === index) {
         item.selected = 1;
         activeIndex = item.index;
@@ -48,7 +66,7 @@ class FileHandler extends Component {
 
         <div className="file-handler-nav-panel">
           <BottomNavigation
-            storage={this.state.navigation}
+            navigationItems={this.state.navigation}
             clickHandler={this.navClickHandler}
           ></BottomNavigation>
         </div>
