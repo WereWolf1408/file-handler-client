@@ -31,7 +31,6 @@ class FileHandler extends Component<FileHandlerPropsI, FileHandlerStateI> {
     this.state = stockData;
     console.log('inside fileHandler Constructor');
     console.log(stockData);
-    
     console.log(this.state);
     this.navClickHandler = this.navClickHandler.bind(this);
   }

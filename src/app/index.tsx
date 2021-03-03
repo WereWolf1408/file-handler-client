@@ -4,13 +4,18 @@ import './index.less';
 import App from '../App';
 import TestAPIComponent from "../components/TestComponent";
 import FileHandler from "../components/FileHandler/FileHandler";
+import {FileHandlerProvider} from '../components/Context/FileHandlerContext';
 // import reportWebVitals from '../reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
     {/* <App /> */}
     {/* <TestAPIComponent/> */}
-    <FileHandler />
+    
+    <FileHandlerProvider>
+      <FileHandler />
+    </FileHandlerProvider>
+   
    </React.StrictMode>,
   document.getElementById('root')
 );
