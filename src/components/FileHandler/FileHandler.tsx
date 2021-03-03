@@ -3,11 +3,10 @@ import PrimaryButton from "../Common/Buttons/PrimaryButton";
 import {Container} from '../Common/Container/Container';
 import {BottomNavigation} from '../Common/BottomNavigation/BottomNavigation';
 import {CustomCard} from '../Common/Card/CustomCard';
-import {stockData} from '../../data/data.js';
 
 import './FileHandler.less';
 
-
+const {stockData} = require('../../data/data.js');
 interface NavigationItemI {
   label: string;
   selected: number;
@@ -31,6 +30,8 @@ class FileHandler extends Component<FileHandlerPropsI, FileHandlerStateI> {
     super(props);
     this.state = stockData;
     console.log('inside fileHandler Constructor');
+    console.log(stockData);
+    
     console.log(this.state);
     this.navClickHandler = this.navClickHandler.bind(this);
   }

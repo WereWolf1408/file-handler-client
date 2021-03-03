@@ -1,6 +1,7 @@
-import logo from './logo.svg';
 import './App.less';
 import React from 'react';
+
+const logo = require("./logo.svg") as string;
 
 function App() {
   return (
