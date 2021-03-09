@@ -1,4 +1,4 @@
-export const stockData = {
+export const data = {
   navigation: [
     {
       label: "Folder 1",

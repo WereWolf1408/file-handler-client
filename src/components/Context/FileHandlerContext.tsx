@@ -1,22 +1,42 @@
-import React, {createContext} from 'react';
+import React, {createContext, useState, useEffect} from 'react';
 
-export const FileHandlerContext = createContext('default value');
+const { data } = require("../../data/data.js");
+
+interface NavigationItemI {
+  label: string;
+  selected: number;
+  index: string;
+}
+
+interface CardsItemI {
+  [key: string]: Array<{ label: string }>;
+}
+
+interface FileHandlerStateI {
+  navigation: Array<NavigationItemI>;
+  activeIndex: string;
+  cards: CardsItemI;
+}
+
+const FileHandlerContext = createContext({} as Array<FileHandlerStateI>);
 
 const FileHandlerProvider = ({children}: any) => {
+  const [stockData, setStockData] = useState(data)
 
-  const mass = [
-    {
-      name: 'default value'
-    }
-  ]
+  useEffect(() => {
+    console.log('use effect function inside DileHandlerProvider Component');
+    console.log('---->');
+    console.log(stockData);
+  })
 
   return (
-    <FileHandlerContext.Provider value={mass}>
+    <FileHandlerContext.Provider value={[stockData, setStockData]}>
       {children}
     </FileHandlerContext.Provider>
   )
 }
 
 export {
-  FileHandlerProvider
+  FileHandlerContext,
+  FileHandlerProvider,
 }
