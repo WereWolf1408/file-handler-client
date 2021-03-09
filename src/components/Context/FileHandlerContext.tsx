@@ -18,7 +18,12 @@ interface FileHandlerStateI {
   cards: CardsItemI;
 }
 
-const FileHandlerContext = createContext({} as Array<FileHandlerStateI>);
+interface FilaHandlerContextI {
+  stockData: FileHandlerStateI;
+  setStockData: (stockData: FileHandlerStateI) => void;
+}
+
+const FileHandlerContext = createContext<FilaHandlerContextI>({stockData: data, setStockData: stockData => console.log('init value')});
 
 const FileHandlerProvider = ({children}: any) => {
   const [stockData, setStockData] = useState(data)
@@ -30,7 +35,7 @@ const FileHandlerProvider = ({children}: any) => {
   })
 
   return (
-    <FileHandlerContext.Provider value={[stockData, setStockData]}>
+    <FileHandlerContext.Provider value={{stockData, setStockData}}>
       {children}
     </FileHandlerContext.Provider>
   )

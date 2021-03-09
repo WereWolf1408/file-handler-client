@@ -9,35 +9,60 @@ import './FileHandler.less';
 
 const {stockData} = require('../../data/data.js');
 
-// interface NavigationItemI {
-//   label: string;
-//   selected: number;
-//   index: string;
-// }
-
-// interface CardsItemI {
-//   [key: string] : Array<{label: string}>;
-// }
-
-// interface FileHandlerStateI {
-//   navigation: Array<NavigationItemI>;
-//   activeIndex: string;
-//   cards: CardsItemI;
-// }
+interface NavigationItemI {
+  label: string;
+  selected: number;
+  index: string;
+}
 
 interface FileHandlerPropsI {}
 
 const FileHandler: FC<FileHandlerPropsI> = () => {
-  const [data, setData] = useContext(FileHandlerContext);
+  const {stockData: data, setStockData: setData} = useContext(FileHandlerContext);
+  const allData = useContext(FileHandlerContext);
 
   useEffect(() => {
     console.log('new file handle class based on hooks');
     console.log(data);
+    console.log(allData);
   })
 
+  const clickHandler = (event: SyntheticEvent<any, Event>, index: number) => {
+    console.log("click handler");
+    console.log(index);
+    let activeIndex = "";
+    const newData = data.navigation.map(
+      (item: NavigationItemI, itemIndex: number) => {
+        if (itemIndex === index) {
+          item.selected = 1;
+          activeIndex = item.index;
+        } else {
+          item.selected = 0;
+        }
+        return item;
+      }
+    );
+    setData({
+      navigation: newData,
+      activeIndex: activeIndex,
+      cards: data.cards,
+    });
+  }
+
   return (
-    <h1>New file Handler</h1>
-  )
+    <Container classes="file-handler-container">
+      <h3>FileHandler Component !</h3>
+      <PrimaryButton title="Click me !" />
+
+      <div className="file-handler-nav-panel">
+        <BottomNavigation
+          navigationItems={data.navigation}
+          clickHandler={clickHandler}
+        ></BottomNavigation>
+      </div>
+
+    </Container>
+  );
 }
 // class FileHandler extends Component<FileHandlerPropsI, FileHandlerStateI> {
 
