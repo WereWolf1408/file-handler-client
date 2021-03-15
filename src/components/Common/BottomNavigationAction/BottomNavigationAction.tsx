@@ -9,7 +9,6 @@ interface CustomButNavActionI {
   index: number;
 } 
 
-
 const CustomBottomNavigationAction = (props: CustomButNavActionI) => {
   const { label, isSelected, onClickHandler, index } = props;
 

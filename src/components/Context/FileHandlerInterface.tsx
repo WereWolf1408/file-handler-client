@@ -10,8 +10,10 @@ interface CardsItemI {
 
 export interface FileHandlerNavigationI {
   navigation: Array<NavigationItemI>;
-  activeIndex: string;
   cards: CardsItemI;
+  activeIndex: string;
+  loading: boolean;
+  firstRun: boolean;
 }
- 
+
 export default function () {}
