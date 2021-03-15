@@ -17,8 +17,6 @@ const CustomBottomNavigation = (props: CustButProps) => {
   const { navigationItems, clickHandler } = props;
 
   useEffect(() => {
-      console.log('useEffecr was called');
-      console.log(navigationItems);
   })
 
   return (

@@ -55,4 +55,6 @@ export const data = {
     ],
   },
   activeIndex: "folder1",
+  loading: false,
+  firstRun: true
 };

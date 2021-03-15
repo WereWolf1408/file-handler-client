@@ -16,27 +16,18 @@ const FileHandler: FC<FileHandlerPropsI> = () => {
   const allData = useContext(FileHandlerContext);
 
   useEffect(() => {
-    console.log('new file handle class based on hooks');
-    console.log(data);
-    console.log(allData);
   })
 
   const clickHandler = (event: SyntheticEvent<any, Event>, index: number) => {
     console.log("click handler");
     console.log(index);
-    const {activeIndex, newData} = buttomNavigationClickHandler(index, data);
-   
-    setData({
-      navigation: newData,
-      activeIndex: activeIndex,
-      cards: data.cards,
-    });
+    const {activeIndex, newData: navigation} = buttomNavigationClickHandler(index, data);
+    setData(Object.assign({}, data, {navigation, activeIndex}))
   }
 
   return (
     <Container classes="file-handler-container">
       <h3>FileHandler Component !</h3>
-      <PrimaryButton title="Click me !" />
 
       <div className="file-handler-nav-panel">
         <BottomNavigation
