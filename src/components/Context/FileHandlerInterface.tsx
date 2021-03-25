@@ -8,6 +8,19 @@ interface CardsItemI {
   [key: string]: Array<{ label: string }>;
 }
 
+export interface DiskInfoI {
+  [key: number]: {
+    Capacity: string;
+    Mounted: string;
+  }
+}
+export interface DiskListI {
+  navigationItem : DiskInfoI;
+  firstRun: boolean;
+  success: boolean;
+  navigationActiveIndex: number;
+}
+
 export interface FileHandlerNavigationI {
   navigation: Array<NavigationItemI>;
   cards: CardsItemI;
@@ -16,4 +29,4 @@ export interface FileHandlerNavigationI {
   firstRun: boolean;
 }
 
-export default function () {}
+// export default function () {}

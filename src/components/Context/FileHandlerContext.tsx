@@ -1,5 +1,5 @@
-import React, {createContext, useState, useEffect} from 'react';
-import {FileHandlerNavigationI} from './FileHandlerInterface';
+import React, {createContext, useState, useEffect, useContext} from 'react';
+import {DiskListI} from './FileHandlerInterface'
 import sendFetch from "../../utils/FetchRequest";
 
 const { data } = require("../../data/data.js");
@@ -10,19 +10,23 @@ const requestOptions = {
 };
 
 interface FilaHandlerContextI {
-  stockData: FileHandlerNavigationI;
-  setStockData: (stockData: FileHandlerNavigationI) => void;
+  stockData: DiskListI;
+  setStockData: (stockData: DiskListI) => void;
 }
 
 const FileHandlerContext = createContext<FilaHandlerContextI>({stockData: data, setStockData: stockData => console.log('init value')});
 
 const FileHandlerProvider = ({children}: any) => {
-  sendFetch(requestUrl, requestOptions);
+  const [stockData, setStockData] = useState({} as DiskListI);
 
-  const [stockData, setStockData] = useState(data)
-  
+  const fetchCallback = (fetchResponse: any) => {
+    setStockData(fetchResponse);
+  }
+
+  sendFetch(requestUrl, requestOptions, fetchCallback);
+
   useEffect(() => {
-    console.log('---> use effect methid inside FileHandlerContext Component');
+    console.log('---> use effect method inside FileHandlerContext Component');
     return function () {
       console.log('this is special function that is called after component unmout and before each reander cycle! need to remember');
     }

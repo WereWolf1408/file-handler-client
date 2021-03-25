@@ -1,35 +1,40 @@
-import React, {useState, useEffect, SyntheticEvent} from 'react';
+import React, {useEffect, SyntheticEvent} from 'react';
 import { BottomNavigation } from '@material-ui/core';
 import {BottomNavigationAction} from '../BottomNavigationAction/BottomNavigationAction';
 
-interface NavigationItemsItem {
-  index: string;
-  label: string;
-  selected: number;
-}
+import { DiskInfoI } from '../../Context/FileHandlerInterface'; 
 
 interface CustButProps {
-  navigationItems: Array<NavigationItemsItem>;
+  navigationItems: DiskInfoI;
+  activeNavigationItem: number;
   clickHandler: (event: SyntheticEvent<any, Event>, index: number) => void;
 }
 
 const CustomBottomNavigation = (props: CustButProps) => {
-  const { navigationItems, clickHandler } = props;
+  const { navigationItems, clickHandler, activeNavigationItem } = props;
 
-  useEffect(() => {
-  })
+  useEffect(() => {})
+
+  const buildNavigationItems = () => {
+    let navItemsArr = [];
+    for (let prop in navigationItems) {
+      let item = navigationItems[prop];
+      navItemsArr.push(
+        <BottomNavigationAction
+          isSelected={parseInt(prop) === activeNavigationItem ? true : false}
+          label={`${item.Mounted}: ${item.Capacity}`}
+          index={parseInt(prop)}
+          key={prop.toString()}
+          onClickHandler={clickHandler}
+        />
+      );
+    }
+    return navItemsArr;
+  }
 
   return (
     <BottomNavigation>
-      {navigationItems.map((item: any, index: number) => (
-        <BottomNavigationAction
-          isSelected={item.selected === 1 ? true : false}
-          label={item.label}
-          index={index}
-          key={index.toString()}
-          onClickHandler={clickHandler}
-        />
-      ))}
+      {buildNavigationItems()}
     </BottomNavigation>
   );
 }

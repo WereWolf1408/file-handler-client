@@ -1,5 +1,6 @@
 import { useContext, useEffect} from "react";
 import { FileHandlerContext } from '../components/Context/FileHandlerContext';
+import { DiskListI } from '../components/Context/FileHandlerInterface';
 
 interface OptionsI {
   method: string;
@@ -8,29 +9,30 @@ interface OptionsI {
 interface sendFetchI {
   (
     url: string,
-    options: OptionsI
+    options: OptionsI,
+    callback: (obj: DiskListI) => void
   ): void
 }
 
-const sendFetch: sendFetchI = (url, options) => {
+const sendFetch: sendFetchI = (url, options, callback) => {
   const {stockData: data, setStockData: setData} = useContext(FileHandlerContext);
 
   useEffect(() => {
-    console.log('---> sendFEtch request Component was called !!!!!!!!!!!!!!!');
     fetch(url, {
       method: options.method || 'GET',
     })
     .then(rawData => rawData.json())
     .then((responce) => {
-      console.log('////  responce from server');
-      console.log(responce);
-      setData(Object.assign({}, data, { firstRun: false }));
+      callback({
+        navigationItem: responce.disks,
+        firstRun: false,
+        success: true,
+        navigationActiveIndex: 0
+      });
     })
   }, [data.firstRun]);
 
-  return {
-
-  };
+  return {};
 }
 
 export default sendFetch;

@@ -13,7 +13,6 @@ const CustomBottomNavigationAction = (props: CustomButNavActionI) => {
   const { label, isSelected, onClickHandler, index } = props;
 
   const onClick: (event: SyntheticEvent<any, Event>) => void = (event) => {
-    console.log(props);
     onClickHandler(event, index);
   }
 
