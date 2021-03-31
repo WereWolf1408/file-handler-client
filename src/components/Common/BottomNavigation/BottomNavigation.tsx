@@ -7,7 +7,7 @@ import { DiskInfoI } from '../../Context/FileHandlerInterface';
 interface CustButProps {
   navigationItems: DiskInfoI;
   activeNavigationItem: number;
-  clickHandler: (event: SyntheticEvent<any, Event>, index: number) => void;
+  clickHandler: (event: SyntheticEvent<any, Event>, index: number, label: string) => void;
 }
 
 const CustomBottomNavigation = (props: CustButProps) => {
@@ -22,7 +22,8 @@ const CustomBottomNavigation = (props: CustButProps) => {
       navItemsArr.push(
         <BottomNavigationAction
           isSelected={parseInt(prop) === activeNavigationItem ? true : false}
-          label={`${item.Mounted}: ${item.Capacity}`}
+          label={`${item.Mounted} ${item.Capacity}`}
+          mounted={item.Mounted}
           index={parseInt(prop)}
           key={prop.toString()}
           onClickHandler={clickHandler}

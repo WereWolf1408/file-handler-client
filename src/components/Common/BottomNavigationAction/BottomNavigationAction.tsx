@@ -5,15 +5,16 @@ import StorageIcon from "@material-ui/icons/Storage";
 interface CustomButNavActionI {
   label: string;
   isSelected: boolean;
-  onClickHandler: (event: SyntheticEvent<any, Event>, index: number) => void;
+  onClickHandler: (event: SyntheticEvent<any, Event>, index: number, label: string) => void;
   index: number;
-} 
+  mounted: string;
+}
 
 const CustomBottomNavigationAction = (props: CustomButNavActionI) => {
-  const { label, isSelected, onClickHandler, index } = props;
+  const { label, isSelected, onClickHandler, index, mounted } = props;
 
   const onClick: (event: SyntheticEvent<any, Event>) => void = (event) => {
-    onClickHandler(event, index);
+    onClickHandler(event, index, mounted);
   }
 
   return (

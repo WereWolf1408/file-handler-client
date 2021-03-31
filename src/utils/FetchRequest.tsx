@@ -23,11 +23,12 @@ const sendFetch: sendFetchI = (url, options, callback) => {
     })
     .then(rawData => rawData.json())
     .then((responce) => {
+      console.log(responce);
       callback({
         navigationItem: responce.disks,
         firstRun: false,
         success: true,
-        navigationActiveIndex: 0
+        navigationActiveIndex: -1
       });
     })
   }, [data.firstRun]);

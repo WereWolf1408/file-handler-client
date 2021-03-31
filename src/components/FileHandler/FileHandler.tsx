@@ -13,10 +13,16 @@ const FileHandler: FC<FileHandlerPropsI> = () => {
 
   useEffect(() => {
     console.log('--> FileHandler Component useEffect');
+    console.log('eeeeeeeeee');
+    
+    console.log(data);
+    
   })
 
-  const clickHandler = (event: SyntheticEvent<any, Event>, index: number) => {
+  const clickHandler = (event: SyntheticEvent<any, Event>, index: number, label: string) => {
     setData(Object.assign({}, data, { navigationActiveIndex: index }));
+    console.log(label);
+    
   }
 
   const renderBody = () => {
