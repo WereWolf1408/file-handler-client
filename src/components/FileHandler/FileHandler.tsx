@@ -6,6 +6,8 @@ import {FileHandlerContext} from '../Context/FileHandlerContext';
 
 import './FileHandler.less';
 
+const classNames = require("classnames");
+
 interface FileHandlerPropsI {}
 
 const FileHandler: FC<FileHandlerPropsI> = () => {
@@ -31,7 +33,7 @@ const FileHandler: FC<FileHandlerPropsI> = () => {
       return (
         <React.Fragment>
           <h1>Data fully loaded</h1>
-          <div className="file-handler-nav-panel">
+          <div className={classNames("file-handler-nav-panel")}>
             <BottomNavigation
               activeNavigationItem={data.navigationActiveIndex}
               navigationItems={data.navigationItem}
