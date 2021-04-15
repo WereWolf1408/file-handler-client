@@ -19,9 +19,14 @@ const FileHandlerContext = createContext<FilaHandlerContextI>({stockData: data, 
 const FileHandlerProvider = ({children}: any) => {
   const [stockData, setStockData] = useState({} as DiskListI);
 
-  const fetchCallback = (fetchResponse: any) => {
-    setStockData(fetchResponse);
-  }
+  const fetchCallback = ({ disks, success }: any) => {
+    setStockData({
+      navigationItem: disks,
+      firstRun: false,
+      success,
+      navigationActiveIndex: -1,
+    });
+  };
 
   sendFetch(requestUrl, requestOptions, fetchCallback);
 

@@ -3,7 +3,7 @@ import { FileHandlerContext } from '../components/Context/FileHandlerContext';
 import { DiskListI } from '../components/Context/FileHandlerInterface';
 
 interface OptionsI {
-  method: string;
+  method?: string;
 }
 
 interface sendFetchI {
@@ -15,8 +15,6 @@ interface sendFetchI {
 }
 
 const sendFetch: sendFetchI = (url, options, callback) => {
-  const {stockData: data, setStockData: setData} = useContext(FileHandlerContext);
-
   useEffect(() => {
     fetch(url, {
       method: options.method || 'GET',
@@ -24,16 +22,9 @@ const sendFetch: sendFetchI = (url, options, callback) => {
     .then(rawData => rawData.json())
     .then((responce) => {
       console.log(responce);
-      callback({
-        navigationItem: responce.disks,
-        firstRun: false,
-        success: true,
-        navigationActiveIndex: -1
-      });
+      callback(responce);
     })
-  }, [data.firstRun]);
-
-  return {};
+  }, [url]);
 }
 
 export default sendFetch;

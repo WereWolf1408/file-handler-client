@@ -1,8 +1,9 @@
-import React, {Component, useContext, SyntheticEvent, FunctionComponent as FC, useEffect} from 'react';
+import React, {Component, useContext, SyntheticEvent, FunctionComponent as FC, useEffect, useState} from 'react';
 import {Container} from '../Common/Container/Container';
 import {BottomNavigation} from '../Common/BottomNavigation/BottomNavigation';
 import {CustomCard} from '../Common/Card/CustomCard';
 import {FileHandlerContext} from '../Context/FileHandlerContext';
+import sendFetch from "../../utils/FetchRequest";
 
 import './FileHandler.less';
 
@@ -12,19 +13,26 @@ interface FileHandlerPropsI {}
 
 const FileHandler: FC<FileHandlerPropsI> = () => {
   const {stockData: data, setStockData: setData} = useContext(FileHandlerContext);
+  const [url, setUrl] = useState<string>();
 
   useEffect(() => {
-    console.log('--> FileHandler Component useEffect');
-    console.log('eeeeeeeeee');
-    
-    console.log(data);
-    
-  })
+    return () => console.log();
+  }, []);
+
+  const updateFilesList = (responce: any) => {
+    console.log('responce from the server');
+    console.log(responce);
+  }
+
+  sendFetch(url, {}, updateFilesList);
 
   const clickHandler = (event: SyntheticEvent<any, Event>, index: number, label: string) => {
+    console.log('666666666666666666666666666666666666666666');
+    
     setData(Object.assign({}, data, { navigationActiveIndex: index }));
     console.log(label);
-    
+    console.log(label.charAt(0));
+    setUrl(`http://localhost:9000/disk/${label.charAt(0)}`);
   }
 
   const renderBody = () => {
